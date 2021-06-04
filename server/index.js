@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-
+const logger = require('morgan');
 
 const profileRouter = require("./routes/profileRoutes.js");
 const app = express();
@@ -10,7 +10,9 @@ mongoose.connect(uri, {useNewUrlParser: true, useFindAndModify: false, useUnifie
 
 // Middlewares
 app.use(express.json());
+app.use(logger('dev'));
 app.use(profileRouter);
+app.use(express.static('uploads'));
 
 app.listen('7777', () => {
     console.log('Server Started on PORT 7777.')
