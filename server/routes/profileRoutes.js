@@ -1,6 +1,7 @@
 const express = require("express");
 const multer = require('multer');
 const path = require('path');
+const { v4: uuidv4 } = require('uuid');
 const profileModel = require("../models/profile");
 const app = express();
 
@@ -9,7 +10,7 @@ const storage = multer.diskStorage({
         cb(null,path.join(__dirname,'../uploads'))
     },
     filename: function (req, file, cb) {
-        cb(null,Date.now() + path.extname(file.originalname))
+        cb(null,uuidv4().replace(/-/g, "") + path.extname(file.originalname))
     }
   })
    
@@ -29,7 +30,12 @@ app.get("/profiles", async (req, res) => {
 });
 
 app.post('/profile', upload.single("profile"), async (req, res) => {
-    const profile = new profileModel(req.body);
+    const profileData = {
+        name: req.body.name,
+        image: req.file.filename
+    }
+
+    const profile = new profileModel(profileData);
     try {
         await profile.save();
         res.send(profile);
