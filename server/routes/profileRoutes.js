@@ -30,6 +30,9 @@ app.get("/profiles", async (req, res) => {
 });
 
 app.post('/profile', upload.single("profile"), async (req, res) => {
+  console.log('Body', req.body);
+  console.log('File', req.file);
+
     const profileData = {
         name: req.body.name,
         image: req.file.filename

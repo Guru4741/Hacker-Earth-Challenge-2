@@ -2,11 +2,15 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const logger = require('morgan');
+require('dotenv').config();
+
+const MONGODB_ACC = process.env.MONGODB_ACC;
+const MONGODB_PASS = process.env.MONGODB_PASS;
 
 const profileRouter = require("./routes/profileRoutes.js");
 const app = express();
 
-const uri = "mongodb+srv://gaurav00711:Monica@4741@cluster0.i84ms.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const uri = `mongodb+srv://${MONGODB_ACC}:${MONGODB_PASS}@cluster0.i84ms.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 mongoose.connect(uri, {useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true});
 
 // Middlewares
