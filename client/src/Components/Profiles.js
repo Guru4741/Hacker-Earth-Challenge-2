@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Spinner from 'react-bootstrap/Spinner'
 import axios from 'axios';
 import Profile from './Profile';
 
@@ -28,12 +29,14 @@ const Profiles = () => {
                     <h1>Profiles</h1>
                 </Col>                
             </Row>
-            <Row>
+            <Row className="justify-content-center">
             {
                 profiles ? profiles.map((data, i) => {
                     return <Profile key={i} data={data}/>})
-                : 'Loading....'
+                :
+                 <Spinner animation="border" variant="primary" />
             }
+            
             </Row>
             <Row className="my-4 text-center">
                 <Col>
