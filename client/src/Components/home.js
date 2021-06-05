@@ -32,15 +32,13 @@ const Home = () => {
         let formData = new FormData();
         formData.append('profile', file);
         formData.append('name', name);
-        const url = "http://localhost:7777/profile";
-        debugger;
+        const url = "http://localhost:7777/profile";    
         axios.post(url, formData, {
             headers: {
               'content-type': 'multipart/form-data'
             }
           })
-            .then(res => {
-                console.log(res.data);
+            .then(res => {                
                 setFile("");
                 setName("");
                 setShow(true);
